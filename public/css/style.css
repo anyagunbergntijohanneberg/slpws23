@@ -1,0 +1,25 @@
+
+body {
+    background-color: #3E4756;
+}
+
+nav {
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #bccfef;
+}
+
+nav a, nav a:link {
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: whitesmoke;
+    text-shadow: 2px 1px 1px #3E4756;
+}
+
+h1 {
+    font-size: 30px;
+    margin-left: 15px;
+}

@@ -1,0 +1,7 @@
+h1 Alla sjukdomar 
+
+
+ol 
+    - sjukdomar.each do |sjukdom|
+        li 
+            a href="sjukdomar/#{sjukdom['sjuk-id']}" #{sjukdom["Namn"]}
