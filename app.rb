@@ -13,3 +13,4 @@ get('/sjukdomar') do
     result = db.execute('SELECT * FROM sjukdomar')
     slim(:"sjukdomar/index",locals:{sjukdomar:result})
 end
+
