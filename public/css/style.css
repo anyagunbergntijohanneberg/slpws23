@@ -30,6 +30,8 @@ a {
 }
 
 a, form {
-    display:inline-block;
-    margin:10px;
-  }
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    height: 20px;
+}
