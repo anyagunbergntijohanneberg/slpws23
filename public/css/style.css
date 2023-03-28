@@ -30,8 +30,10 @@ a {
 }
 
 a, form {
-    display: flex;
-    justify-content: space-between;
     margin-top: 15px;
     height: 20px;
+}
+
+form {
+    background-color: #3E4756;
 }
