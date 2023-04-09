@@ -26,16 +26,22 @@ post('/sjukdomar/new') do
     redirect('/sjukdomar')
 end
 
-get('/login') do
-    slim(:"/login")
+get('/register') do
+    slim(:register)
 end
 
-post('/login') do
-    
-end
+post('/users/new') do
+    username = params [:username]
+    password = params [:password]
+    password_confirmation = params [:password_confirmation]
 
-get('/login') do
-    slim(:"/register")
+    if (password == password_confirmation)
+        #lägg till användare
+
+    else 
+        #Felhantering
+        "Lösenorden matchar ej!"
+    redirect('/')
 end
 
 get('/sjukdomar/:id') do
