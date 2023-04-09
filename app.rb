@@ -15,16 +15,27 @@ get('/sjukdomar') do
 end
 
 get('/sjukdomar/new') do
-    slim(:"sjukdomar/new")
+    slim(:"/sjukdomar/new")
 end
 
 post('/sjukdomar/new') do
     Namn = params[:Namn]
-    Sjuk_id = params[:Sjuk_id].to_i
-    p "Vi fick in datan #{Namn} och #{Sjuk_id}"
+    p "Vi fick in datan #{Namn}"
     db = SQLite3::Database.new("db/sjukdomar.db")
-    db.execute("INSERT INTO sjukdomar (Namn, Sjuk_id) VALUES (?,?)",Namn, Sjuk_id)
+    db.execute("INSERT INTO sjukdomar (Namn) VALUES (?)",Namn)
     redirect('/sjukdomar')
+end
+
+get('/login') do
+    slim(:"/login")
+end
+
+post('/login') do
+    
+end
+
+get('/login') do
+    slim(:"/register")
 end
 
 get('/sjukdomar/:id') do
