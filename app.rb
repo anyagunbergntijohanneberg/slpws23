@@ -2,8 +2,9 @@ require 'sinatra'
 require 'slim'
 require 'sinatra/reloader'
 require 'sqlite3'
+require 'BCrypt'
 
-get('/') do
+get('/') do 
     slim(:start)
 end
 
@@ -31,17 +32,22 @@ get('/register') do
 end
 
 post('/users/new') do
-    username = params [:username]
-    password = params [:password]
-    password_confirmation = params [:password_confirmation]
+    username = params[:username]
+    password = params[:password]
+    password_confirmation = params[:password_confirmation]
 
     if (password == password_confirmation)
         #lägg till användare
-
+        password_digest = BCrypt::Password.create(password)
+        db = SQLite3::Database.new('db/sjukdomar.db')
+        db.execute("INSERT INTO Users (username,pwdigest) VALUES (?,?)", username,password_digest)
+        redirect('/')
     else 
+    
         #Felhantering
         "Lösenorden matchar ej!"
-    redirect('/')
+    
+    end
 end
 
 get('/sjukdomar/:id') do
