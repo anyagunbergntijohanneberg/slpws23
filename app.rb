@@ -4,8 +4,21 @@ require 'sinatra/reloader'
 require 'sqlite3'
 require 'BCrypt'
 
+enable :sessions
+
+before do
+    if (session[:user_id] == nil) && (request.path_info != '/')
+        session[:error] = "Du behöver logga in för att kunna se denna sida"
+        redirect('/error')
+    end
+end
+
 get('/') do 
     slim(:start)
+end
+
+get('/error') do
+    slim(:error)
 end
 
 get('/sjukdomar') do
@@ -58,3 +71,22 @@ get('/sjukdomar/:id') do
     slim(:"sjukdomar/show",locals:{result:result})
 end
 
+get('/login') do
+    slim(:login)
+end
+
+post('/login') do
+    username = params[:username]
+    password = params[:password]
+    db = SQLite3::Database.new('db/sjukdomar.db')
+    db.results_as_hash = true
+    result = db.execute("SELECT * FROM users WHERE username = ?",username).first
+    pwdigest = result["pwdigest"]
+    id = result["id"]
+
+    if BCrypt::Password.new(pwdigest) == password
+        redirect('/')
+    else
+        "FEL LÖSEN!"
+    end
+end
