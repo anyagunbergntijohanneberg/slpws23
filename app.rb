@@ -6,12 +6,7 @@ require 'BCrypt'
 
 enable :sessions
 
-before do
-    if (session[:user_id] == nil) && (request.path_info != '/')
-        session[:error] = "Du behöver logga in för att kunna se denna sida"
-        redirect('/error')
-    end
-end
+
 
 get('/') do 
     slim(:start)
